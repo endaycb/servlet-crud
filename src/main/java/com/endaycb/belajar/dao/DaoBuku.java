@@ -29,10 +29,9 @@ public class DaoBuku implements ImplementBuku  {
     final private String delete = "DELETE FROM buku WHERE id=?";
     final private String searchId = "SELECT * FROM buku WHERE id=?";
     
-    public void DaoBuku(){
+    public DaoBuku(){
         Conn conn = new Conn();
         this.connection = conn.Conn();
-        System.out.println("ok");
     }
     
   
@@ -72,13 +71,14 @@ public class DaoBuku implements ImplementBuku  {
     }
 
     @Override
-    public List<Buku> getByJudul() {
+    public List<Buku> getByJudul(String judul) {
         List<Buku> lb = null;
         PreparedStatement ps = null;
         
         try{
             lb = new ArrayList<Buku>();
             ps = connection.prepareStatement(searchJudul);
+            ps.setString(1, "%"+judul+"%");
             
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -192,7 +192,7 @@ public class DaoBuku implements ImplementBuku  {
         PreparedStatement ps = null;
          
         try{
-            ps = connection.prepareStatement(update);
+            ps = connection.prepareStatement(delete);
             ps.setInt(1, id);
             ps.executeUpdate();
             
