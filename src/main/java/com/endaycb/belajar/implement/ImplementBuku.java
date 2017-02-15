@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ImplementBuku {
     public List<Buku> getAll();
-    public List<Buku> getByJudul();
+    public List<Buku> getByJudul(String judul);
     public Buku getById(Integer id);
     public void insert(Buku b);
     public void update(Buku b);
