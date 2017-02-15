@@ -7,28 +7,28 @@
     </head>
     <body>
         <h1>Insert Buku</h1>
-        <form method="POST" action="ControllerBuku" name="Add">
+        <form method="POST" action="buku?action=Add">
             <table>
                 <tr>
                     <td>Judul Buku</td>
-                    <td><input type="text" name="judul" /></td>
+                    <td><input type="text" name="judul"  required/></td>
                 </tr>
                 <tr>
                      <td>Pengarang</td>
-                     <td><input type="text" name="pengarang" /></td>
+                     <td><input type="text" name="pengarang" required/></td>
                 </tr>
                 <tr>
                      <td>Penerbit</td>
-                     <td><input type="text" name="penerbit" /></td>
+                     <td><input type="text" name="penerbit" required/></td>
                 </tr>
 
                  <tr>
                      <td>Jumlah</td>
-                     <td><input type="text" name="jumlah" /></td>
+                     <td><input type="text" name="jumlah" required/></td>
                  </tr>
                  <tr>
                      <td></td>
-                     <td><input type="submit" value="Submit" /> <a href="">Batal</a></td>
+                     <td><input type="submit" value="Submit" /> <a href="buku">Batal</a></td>
                  </tr>
             </table>  
         </form>

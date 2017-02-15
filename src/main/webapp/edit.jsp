@@ -25,28 +25,28 @@
                 buku = dBuku.getById(id);
         %>
         <h1>Edit Buku</h1>
-        <form method="POST" action="ControllerBuku" name="Edit">
+        <form method="POST" action="buku?action=Edit" name="">
             <table>
                 <tr>
                     <td>Judul Buku</td>
-                    <td><input type="text" name="judul" value="<%=buku.getJudul() %>"/></td>
+                    <td><input type="text" name="judul" value="<%=buku.getJudul() %>" required/></td>
                 </tr>
                 <tr>
                      <td>Pengarang</td>
-                     <td><input type="text" name="pengarang" value="<%=buku.getPengarang() %>"/></td>
+                     <td><input type="text" name="pengarang" value="<%=buku.getPengarang() %>" required/></td>
                 </tr>
                 <tr>
                      <td>Penerbit</td>
-                     <td><input type="text" name="penerbit" value="<%=buku.getPenerbit() %>" /></td>
+                     <td><input type="text" name="penerbit" value="<%=buku.getPenerbit() %>" required/></td>
                 </tr>
 
                  <tr>
                      <td>Jumlah</td>
-                     <td><input type="text" name="jumlah" value="<%=buku.getJumlah() %>" /></td>
+                     <td><input type="text" name="jumlah" value="<%=buku.getJumlah() %>" required/></td>
                  </tr>
                  <tr>
                      <td><input type="hidden" name="id" value="<%=buku.getId() %>"></input></td>
-                     <td><input type="submit" value="Submit" /> <a href=""></a></td>
+                     <td><input type="submit" value="Submit" /> <a href="buku">Batal</a></td>
                  </tr>
             </table>  
         </form>
