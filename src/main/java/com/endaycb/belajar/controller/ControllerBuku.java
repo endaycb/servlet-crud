@@ -36,45 +36,60 @@ public class ControllerBuku extends HttpServlet{
     public void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
        String action = req.getParameter("action");
        
-       
-       if(req.getParameter("id") != null && action.equalsIgnoreCase("Add")){
-           try{
-                Buku b = new Buku();
-                b.setId(Integer.parseInt(req.getParameter("id")));
-                b.setJudul(req.getParameter("judul"));
-                b.setPenerbit(req.getParameter("penerbit"));
-                b.setPengarang(req.getParameter("pengarang"));
-                b.setJumlah(Integer.parseInt(req.getParameter("jumlah")));
+       if(action != null){
+            if(action.equals("FormAdd")){
+                urlRedirect = urlInsert;
+            } else if(req.getParameter("id") != null && action.equalsIgnoreCase("FormEdit")){
+                urlRedirect = urlEdit;
+                
+            } else if(req.getParameter("id") != null && action.equalsIgnoreCase("Delete")){
+                try{
+                    ib.delete(Integer.parseInt(req.getParameter("id")));
+                } finally{
+                    //res.sendRedirect(urlBuku);
+                    urlRedirect = urlBuku;
+                }
+                
+            } else if(action.equalsIgnoreCase("Add")){
+                //res.sendRedirect(urlInsert);
+                
+                try{
+                    Buku b = new Buku();
+                    b.setJudul(req.getParameter("judul"));
+                    b.setPenerbit(req.getParameter("penerbit"));
+                    b.setPengarang(req.getParameter("pengarang"));
+                    b.setJumlah(Integer.parseInt(req.getParameter("jumlah")));
 
-                ib.insert(b);
-           } finally{
-               //res.sendRedirect(urlBuku);
-               urlRedirect = urlBuku;
-           }
-       } else if(req.getParameter("id") != null && action.equalsIgnoreCase("Edit")){
-           try{
-               Buku b = ib.getById(Integer.parseInt(req.getParameter("id")));
-               
-               ib.update(b);
-           } finally{
-               //res.sendRedirect(urlBuku);
-               urlRedirect = urlBuku;
-           }
-       } else if(req.getParameter("id") != null && action.equalsIgnoreCase("Delete")){
-           try{
-               ib.delete(Integer.parseInt(req.getParameter("id")));
-           } finally{
-               //res.sendRedirect(urlBuku);
-               urlRedirect = urlBuku;
-           }
-       } else if(action.equals("FormAdd")){
-           //res.sendRedirect(urlInsert);
-           urlRedirect = urlInsert;
-       } else if(req.getParameter("id") != null && action.equalsIgnoreCase("FormEdit")){
-           //res.sendRedirect(urlEdit);
-           urlRedirect = urlEdit;
-       } else {
-           urlRedirect = urlBuku;
+                    ib.insert(b);
+                }finally{
+                    //res.sendRedirect(urlBuku);
+                    urlRedirect = urlBuku;
+                }
+                
+            } else if(req.getParameter("id") != null && action.equalsIgnoreCase("Edit")){
+                //res.sendRedirect(urlEdit);
+                try{
+                    Buku b = ib.getById(Integer.parseInt(req.getParameter("id")));
+                    b.setId(Integer.parseInt(req.getParameter("id")));
+                    b.setJudul(req.getParameter("judul"));
+                    b.setPenerbit(req.getParameter("penerbit"));
+                    b.setPengarang(req.getParameter("pengarang"));
+                    b.setJumlah(Integer.parseInt(req.getParameter("jumlah")));
+                    
+                    ib.update(b);
+                } finally{
+                    //res.sendRedirect(urlBuku);
+                    urlRedirect = urlBuku;
+                }
+                
+            } else if(req.getParameter("txtCari") != null){
+                urlRedirect = urlBuku+"?txtCari="+req.getParameter("txtCari");
+            }else {
+                urlRedirect = urlBuku;
+                
+            }
+       }else{
+            urlRedirect = urlBuku;
        }
         RequestDispatcher rd = req.getRequestDispatcher(urlRedirect);
         rd.forward(req, res);
