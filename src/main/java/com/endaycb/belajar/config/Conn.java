@@ -12,6 +12,7 @@ import java.sql.SQLException;
  *
  * @author mashiro
  */
+
 public class Conn {
      private Connection connection;
     final private String dbClass = "com.mysql.jdbc.Driver"; 
